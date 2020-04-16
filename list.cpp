@@ -1,6 +1,6 @@
 #include "list.h"
 
-list::list() {
+List::List() {
     /* list constructor 
      * No input: initialize our array at length 2
      */
@@ -9,7 +9,7 @@ list::list() {
     ln = 0;
 }
 
-list::list(int l) {
+List::List(int l) {
     /* list constructor 
      * Input: we can size the array accordingly
      */
@@ -18,19 +18,19 @@ list::list(int l) {
     ln = 0;
 }
 
-list::~list() {
+List::~List() {
     if (arr) delete [] arr;
 }
 
-int list::get(int i) {
+int List::get(int i) {
     return arr[i];
 }
 
-int list::length() {
+int List::length() {
     return ln;
 }
 
-void list::append(int n) {
+void List::append(int n) {
     int* temp;
     
     if(ln >= capacity) {

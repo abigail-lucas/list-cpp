@@ -13,7 +13,13 @@ You can quite easily boot this project by compiling it with g++. For personal ea
 
 `bash compile.sh`
 
+
+If you want run the tests simply run
+
+
+`bash tests.sh`
+
 ## TODO
 
-- Add tests
+- Add more tests as I add more functionality
 - Add the ability to handle multiple data types

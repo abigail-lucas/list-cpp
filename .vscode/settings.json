@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "*.tcc": "cpp",
+        "cwchar": "cpp",
+        "string": "cpp",
+        "type_traits": "cpp",
+        "istream": "cpp",
+        "new": "cpp",
+        "ostream": "cpp",
+        "stdexcept": "cpp",
+        "string_view": "cpp",
+        "system_error": "cpp",
+        "utility": "cpp",
+        "iostream": "cpp"
+    }
+}
