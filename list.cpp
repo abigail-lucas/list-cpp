@@ -1,4 +1,11 @@
+#include <exception>
 #include "list.h"
+
+class IndexOutOfRange : public std::exception {
+    virtual const char* what() const throw() {
+        return "ListError: Index Out Of Range";
+    }
+} ioor;
 
 List::List() {
     /* list constructor 
@@ -19,10 +26,15 @@ List::List(int l) {
 }
 
 List::~List() {
-    if (arr) delete [] arr;
+    if (arr) {
+        delete [] arr;
+    }
 }
 
 int List::get(int i) {
+    if (i >= ln) {
+        throw ioor;
+    }
     return arr[i];
 }
 
@@ -44,4 +56,18 @@ void List::append(int n) {
     }
     arr[ln] = n;
     ln++;
+}
+
+void List::pop() {
+    // This method just shrinks the list length by one
+    ln -= 1;
+}
+
+void List::pop(int i) {
+    // This method removes an element at a specific place in the list
+    for(int r=(i+1); r < ln; r++) {
+        int temp = arr[r];
+        arr[r-1] = temp;
+    }
+    ln -= 1;
 }
