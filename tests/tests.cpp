@@ -119,6 +119,8 @@ class ListTests {
             test_length();
             test_append();
             test_pop();
+            cout << "---------------------" << endl;
+            cout << "All tests passed" << endl;
         };
 };
 
