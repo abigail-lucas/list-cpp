@@ -1,10 +1,15 @@
 #!/bin/bash
 
-echo "Compiling list module"
-
-# Compile the actual module and its tests
-g++ -c list.cpp
-g++ -c tests/tests.cpp
+if [ -z $1 ]; then
+    echo "Compiling list module"
+    g++ -c list.cpp
+else
+if [ $1 == -t ]; then
+    echo "Compiling list module and tests"
+    g++ -c list.cpp
+    g++ -c tests/tests.cpp
+fi
+fi
 
 mv *.o compiled/
 
