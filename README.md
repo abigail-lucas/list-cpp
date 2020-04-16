@@ -17,7 +17,7 @@ You can quite easily boot this project by compiling it with g++. For personal ea
 If you want run the tests simply run
 
 
-`bash tests.sh`
+`bash test.sh`
 
 ## TODO
 
