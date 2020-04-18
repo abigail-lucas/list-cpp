@@ -75,6 +75,28 @@ class ListTests {
 
             cout << "Test passed: Append" << endl;
         };
+        void test_extend() {
+            List testing_list = List(3);
+            int extending_arr[3] = {1,2,3};
+
+            assert(testing_list.length() == 0);
+
+            testing_list.extend(extending_arr, 3);
+
+            assert(testing_list.length() == 3);
+            assert(testing_list.get(0) == 1);
+            assert(testing_list.get(1) == 2);
+            assert(testing_list.get(2) == 3);
+
+            testing_list.extend(extending_arr, 3);
+
+            assert(testing_list.length() == 6);
+            assert(testing_list.get(3) == 1);
+            assert(testing_list.get(4) == 2);
+            assert(testing_list.get(5) == 3);
+
+            cout << "Test passed: Extend" << endl;
+        };
         void test_pop_last() {
             List testing_list = List(3); // Creates our List at length 3
             testing_list.append(1);

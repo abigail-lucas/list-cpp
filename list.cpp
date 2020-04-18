@@ -64,6 +64,33 @@ void List::append(int n) {
     ln++;
 }
 
+void List::extend(int n[], int l) {
+    int* temp;
+
+    if((ln + l) >= capacity) {
+        int new_size;
+        if((ln + l) >= capacity*2) {
+            new_size = (ln + l) * 2;
+        }
+        else {
+            new_size = capacity * 2;
+        }
+
+        temp = new int[new_size]; // Double our array size
+        for(int i=0; i < ln; i++) {
+            temp[i] = arr[i];
+        }
+        capacity = new_size;
+        delete [] arr;
+        arr = temp;
+    }
+
+    for(int i=0; i < l; i++) {
+        arr[ln+i] = n[i];
+    }
+    ln += l;
+}
+
 void List::pop() {
     // This method just shrinks the list length by one
     if (ln <= 0) {
@@ -100,6 +127,7 @@ void List::pop(int s, int e) {
     if(e >= ln) {
         throw ioor;
     }
+
     int diff = e - s + 1;
     for(int r=(e+1); r < ln; r++) {
         int temp = arr[r];
