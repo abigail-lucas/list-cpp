@@ -48,25 +48,27 @@ int List::length() {
     return ln;
 }
 
-void List::append(int n) {
+void List::resize(int c) {
     int* temp;
+     temp = new int[c];
+    for(int i=0; i < ln; i++) {
+        temp[i] = arr[i];
+    }
+    capacity = c;
+    delete [] arr;
+    arr = temp;
+}
+
+void List::append(int n) {
     
     if(ln >= capacity) {
-        temp = new int[capacity*2]; // Double our array size
-        for(int i=0; i < ln; i++) {
-            temp[i] = arr[i];
-        }
-        capacity *= 2;
-        delete [] arr;
-        arr = temp;
+        resize(capacity*2);
     }
     arr[ln] = n;
     ln++;
 }
 
 void List::extend(int n[], int l) {
-    int* temp;
-
     if((ln + l) >= capacity) {
         int new_size;
         if((ln + l) >= capacity*2) {
@@ -75,14 +77,7 @@ void List::extend(int n[], int l) {
         else {
             new_size = capacity * 2;
         }
-
-        temp = new int[new_size]; // Double our array size
-        for(int i=0; i < ln; i++) {
-            temp[i] = arr[i];
-        }
-        capacity = new_size;
-        delete [] arr;
-        arr = temp;
+        resize(new_size);
     }
 
     for(int i=0; i < l; i++) {

@@ -2,6 +2,7 @@ class List {
     protected:
         int* arr;
         int ln, capacity;
+        void resize(int c);
     public:
         List();
         List(int l);
