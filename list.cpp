@@ -3,9 +3,15 @@
 
 class IndexOutOfRange : public std::exception {
     virtual const char* what() const throw() {
-        return "ListError: Index Out Of Range";
+        return "IndexError: Index Out Of Range";
     }
 } ioor;
+
+class PopFromEmptyList : public std::exception {
+    virtual const char* what() const throw() {
+        return "IndexError: pop from empty list";
+    }
+} pfel;
 
 List::List() {
     /* list constructor 
@@ -60,14 +66,44 @@ void List::append(int n) {
 
 void List::pop() {
     // This method just shrinks the list length by one
+    if (ln <= 0) {
+        throw pfel;
+    }
+
     ln -= 1;
 }
 
 void List::pop(int i) {
     // This method removes an element at a specific place in the list
+    if(ln <= 0) {
+        throw pfel;
+    }
+    if(i >= ln) {
+        throw ioor;
+    }
+
     for(int r=(i+1); r < ln; r++) {
         int temp = arr[r];
         arr[r-1] = temp;
     }
     ln -= 1;
+}
+
+void List::pop(int s, int e) {
+    // This method removes a range of elements
+    if(ln <= 0){
+        throw pfel;
+    }
+    if(s <= 0) {
+        throw ioor;
+    }
+    if(e >= ln) {
+        throw ioor;
+    }
+    int diff = e - s + 1;
+    for(int r=(e+1); r < ln; r++) {
+        int temp = arr[r];
+        arr[r-diff] = temp;
+    }
+    ln -= diff;
 }

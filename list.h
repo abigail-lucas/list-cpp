@@ -11,5 +11,6 @@ class List {
         void append(int n);
         void pop();
         void pop(int i);
+        void pop(int s, int e);
     friend class ListTests;
 };

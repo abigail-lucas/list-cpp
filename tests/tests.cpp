@@ -1,6 +1,5 @@
 #include <iostream>
 #include <assert.h>
-#include <string.h>
 #include "../list.h"
 using namespace std;
 
@@ -76,9 +75,43 @@ class ListTests {
 
             cout << "Test passed: Append" << endl;
         };
-        void test_pop() {
+        void test_pop_last() {
+            List testing_list = List(3); // Creates our List at length 3
+            testing_list.append(1);
+            testing_list.append(3);
+            testing_list.append(5);
+
+            // First we assert that the last element available is 5
+            assert(testing_list.get(testing_list.length() - 1) == 5);
+            assert(testing_list.length() == 3);
+
+            testing_list.pop();
+
+            // Now we assert that the last element available is 3
+            assert(testing_list.get(testing_list.length() - 1) == 3);
+            assert(testing_list.length() == 2);
+
+            cout << "Test passed: Pop last" << endl;
+        };
+        void test_pop_last_errors() {
+            List testing_list = List();
+
+            bool error_happened = false;
+            try {
+                testing_list.pop();
+            }
+            catch(exception& e) {
+                // We expect the error to happen
+                error_happened = true;
+            }
+            assert(error_happened == true);
+            assert(testing_list.ln == 0);
+
+            cout << "Test passed: Pop last error" << endl;
+        };
+        void test_pop_one() {
             // Test the pop function of List
-            List testing_list = List(); // Creates our List at length 2
+            List testing_list = List(3); // Creates our List at length 3
             testing_list.append(1);
             testing_list.append(3);
             testing_list.append(5);
@@ -95,19 +128,95 @@ class ListTests {
             // The length should have shrunk by 1
             assert(testing_list.length() == 2);
 
-            testing_list.append(7);
+            cout << "Test passed: Pop one" << endl;
+        };
+        void test_pop_one_errors() {
+            List testing_list = List(3); // Creates our List at length 3
 
-            // First we assert that the last element available is 7
-            assert(testing_list.get(testing_list.length() - 1) == 7);
-            assert(testing_list.ln == 3);
+            bool error_happened = false;
+            try {
+                testing_list.pop(0);
+            }
+            catch(exception& e) {
+                error_happened = true;
+            }
+            assert(error_happened == true);
 
-            testing_list.pop();
+            testing_list.append(1);
 
-            // Now we assert that the last element available is 5
-            assert(testing_list.get(testing_list.length() - 1) == 5);
-            assert(testing_list.ln == 2);
+            error_happened = false;
+            try
+            {
+                testing_list.pop(1);
+            }
+            catch(exception& e)
+            {
+                error_happened = true;
+            }
+            assert(error_happened == true);
 
-            cout << "Test passed: Pop" << endl;
+            cout << "Test passed: Pop one errors" << endl;
+        };
+        void test_pop_many() {
+            List testing_list = List(5); // List of 5 for many options
+
+            testing_list.append(0);
+            testing_list.append(1);
+            testing_list.append(2);
+            testing_list.append(3);
+            testing_list.append(4);
+
+            testing_list.pop(1, 3); // Here we pop places 1,2,3
+
+            assert(testing_list.get(0) == 0);
+            assert(testing_list.get(1) == 4);
+            assert(testing_list.length() == 2);
+
+            cout << "Test passed: Pop many" << endl;
+        };
+        void test_pop_many_errors() {
+            List testing_list = List(5); // List of 5 for many options
+
+            bool error_happened = false;
+            try
+            {
+                testing_list.pop(0, 4);
+            }
+            catch(exception& e)
+            {
+                error_happened = true;
+            }
+            assert(error_happened == true);
+
+            testing_list.append(0);
+            testing_list.append(1);
+            testing_list.append(2);
+            testing_list.append(3);
+            testing_list.append(4);
+
+            error_happened = false;
+            try
+            {
+                testing_list.pop(-1, 3);
+            }
+            catch(exception& e)
+            {
+                error_happened = true;
+            }
+            assert(error_happened == true);
+
+            error_happened = false;
+            try
+            {
+                testing_list.pop(0, 6);
+            }
+            catch(exception& e)
+            {
+                error_happened = true;
+            }
+            assert(error_happened == true);
+
+            cout << "Test passed: Pop many errors" << endl;
         };
     public:
         ListTests() {
@@ -118,7 +227,12 @@ class ListTests {
             test_get();
             test_length();
             test_append();
-            test_pop();
+            test_pop_last();
+            test_pop_last_errors();
+            test_pop_one();
+            test_pop_one_errors();
+            test_pop_many();
+            test_pop_many_errors();
             cout << "---------------------" << endl;
             cout << "All tests passed" << endl;
         };
