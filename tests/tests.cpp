@@ -242,6 +242,8 @@ class ListTests {
         };
     public:
         ListTests() {
+        };
+        void run_tests() {
             cout << "---------------------" << endl;
             cout << "Running tests" << endl;
             cout << "---------------------" << endl;
@@ -264,5 +266,6 @@ int main() {
     // Create a Testing Class with an empty list
     // The constructor runs the tests
     ListTests testing_class = ListTests();
+    testing_class.run_tests();
     return 0;
 }
